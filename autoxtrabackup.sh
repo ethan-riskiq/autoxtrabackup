@@ -1,21 +1,21 @@
 #!/bin/bash
 # MySQL backup script
-# https://github.com/gregorystorme/autoxtrabackup
-# Copyright (c) 2014 Gregory Storme
-# Version: 0.2
+# https://github.com/ethan-riskiq/autoxtrabackup.git
+# Copyright (c) 2020 ethan shrago
+# Version: 1.0
 
 if [ -f /etc/default/autoxtrabackup ] ; then
         . /etc/default/autoxtrabackup
 else
 
-backupDir=/var/backups/mysql
+backupDir=/export/backup
 hoursBeforeFull=48
-mysqlUser=dbuser
-mysqlPwd=password
+mysqlUser=admin
+mysqlPwd=admin
 compression=true
 keepDays=7
-sendEmail=never
-emailAddress=
+sendEmail=always
+emailAddress=ethan.shrago@riskiq.net
 fi
 
 #####
@@ -61,7 +61,7 @@ done
 
 dateNow=`date +%Y-%m-%d_%H-%M-%S`
 dateNowUnix=`date +%s`
-backupLog=/tmp/backuplog
+backupLog=/var/log/mysql/autoxtrabackup.log
 delDay=`date -d "-$keepDays days" +%Y-%m-%d`
 
 # Check if innobackupex is installed (percona-xtrabackup)
